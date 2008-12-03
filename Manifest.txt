@@ -3,9 +3,13 @@ Manifest.txt
 PostInstall.txt
 README.rdoc
 Rakefile
+bin/osdc
 lib/osdc.rb
+lib/osdc/cli.rb
 script/console
 script/destroy
 script/generate
+test/fixtures/paper-2008.html
 test/test_helper.rb
 test/test_osdc.rb
+test/test_osdc_cli.rb
