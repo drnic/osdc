@@ -5,10 +5,6 @@ require "hpricot"
 module Osdc
   class CLI
     def self.execute(stdout, arguments=[])
-      self.new.execute(stdout, arguments)
-    end
-    
-    def execute(stdout, arguments=[])
       parser = OptionParser.new do |opts|
         opts.banner = <<-BANNER.gsub(/^          /,'')
           Usage: #{File.basename($0)} [options]
@@ -23,14 +19,10 @@ module Osdc
         opts.parse!(arguments)
       end
 
-      parse_schedule
+      @doc = Hpricot(open("http://osdc.com.au/#{Date.today.year}/papers/index.html"))
       if @today
         stdout.puts @doc.search("table td i").map { |item| item.inner_html }.reject { |i| i.strip.empty? }.sort
       end
-    end
-    
-    def parse_schedule
-      @doc = Hpricot(open("http://osdc.com.au/#{Date.today.year}/papers/index.html"))
     end
   end
 end

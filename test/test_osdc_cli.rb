@@ -4,9 +4,10 @@ require 'osdc/cli'
 class TestOsdcCli < Test::Unit::TestCase
   context "for 2008 schedule" do
     setup do
-      Osdc::CLI.any_instance.expects(:open).with("http://osdc.com.au/2008/papers/index.html").returns(
-        File.read(File.dirname(__FILE__) + "/fixtures/paper-2008.html")
-      )
+      html = File.read(File.dirname(__FILE__) + "/fixtures/paper-2008.html")
+      Osdc::CLI.expects(:open).
+        with("http://osdc.com.au/2008/papers/index.html").
+        returns(html)
       @stdout_io = StringIO.new
     end
 
